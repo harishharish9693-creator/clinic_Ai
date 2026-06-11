@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dementia Care & Medicine Reminder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      /* Elegant calming gradient background */
+      background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+      margin: 0;
+      padding: 0;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 28px;
+      color: #1e3a8a;
+    }
+
+    .mat {
+      max-width: 750px;
+      margin: 40px auto;
+      padding: 25px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      display: block;
+      color: #374151;
+    }
+
+    select, input[type="time"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #f9fafb;
+      transition: border 0.3s ease;
+    }
+
+    select:focus, input[type="time"]:focus {
+      border-color: #3b82f6;
+      outline: none;
+      background: #fff;
+    }
+
+    button {
+      padding: 10px 16px;
+      margin: 10px 0 20px;
+      border: none;
+      border-radius: 8px;
+      background: #10b981;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+
+    button:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+
+    h3 {
+      margin-top: 25px;
+      color: #1e3a8a;
+      font-size: 20px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    #reminderSection label {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 6px 0 4px;
+      display: block;
+      color: #4b5563;
+    }
+
+    /* Smooth fade-in effect */
+    #output {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="mat">
+    <h1>Dementia Care Guide & Medicine Reminder</h1>
+
+    <label for="dementiaSelect"><b>Select Dementia Type:</b></label>
+    <select id="dementiaSelect">
+      <option value="">-- Select --</option>
+    </select>
+
+    <div id="output" style="display:none;">
+      <h3>Medications:</h3>
+      <ul id="medications"></ul>
+
+      <h3>Requirements:</h3>
+      <ul id="requirements"></ul>
+
+      <h3>Set Medicine Reminders:</h3>
+      <div id="reminderSection"></div>
+    </div>
+  </div>
+
+  <script>
+    const dementiaData = {
+      "dementiaTypes": [
+        {
+          "name": "Alzheimer’s Disease",
+          "medications": ["Donepezil", "Rivastigmine", "Galantamine", "Memantine", "Donepezil + Memantine (Combination therapy)"],
+          "requirements": ["Cognitive therapy & memory exercises", "Physical exercise & Mediterranean diet", "Sleep management", "Caregiver support & structured routine"]
+        },
+        {
+          "name": "Vascular Dementia",
+          "medications": ["Blood pressure medications", "Statins", "Diabetes medications", "Antiplatelet drugs (Aspirin, Clopidogrel)"],
+          "requirements": ["Strict control of hypertension, diabetes, cholesterol", "Regular physical activity", "Avoid smoking & alcohol", "Stroke prevention measures"]
+        },
+        {
+          "name": "Lewy Body Dementia",
+          "medications": ["Donepezil", "Rivastigmine", "Levodopa (for movement)", "Antipsychotics (used cautiously)"],
+          "requirements": ["Fall prevention & home safety", "Sleep management (treat REM sleep disorder)", "Occupational & speech therapy", "Caregiver education (hallucinations handling)"]
+        },
+        {
+          "name": "Frontotemporal Dementia",
+          "medications": ["SSRIs (Sertraline, Fluoxetine)", "Antipsychotics (if severe agitation)"],
+          "requirements": ["Speech & language therapy", "Behavioral therapy", "Support for caregivers", "Structured daily routine"]
+        },
+        {
+          "name": "Parkinson’s Disease Dementia",
+          "medications": ["Rivastigmine (first-line)", "Levodopa", "Carbidopa", "Memantine"],
+          "requirements": ["Regular exercise & physiotherapy", "Balanced diet & hydration", "Sleep management", "Support for tremors & mobility"]
+        },
+        {
+          "name": "Mixed Dementia",
+          "medications": ["Alzheimer’s medications (Donepezil, Memantine)", "Vascular risk management (BP meds, statins, diabetes control)"],
+          "requirements": ["Lifestyle changes for brain + heart health", "Regular cognitive & physical therapy", "Routine medical checkups"]
+        },
+        {
+          "name": "Other Causes",
+          "medications": ["Rehabilitation & cognitive therapy (Brain Injury Dementia)", "Antiretroviral therapy (HIV dementia)", "Thiamine (Vitamin B1) supplements (Alcohol-related dementia)", "Antipsychotics & antidepressants (Huntington’s disease)", "Supportive & palliative care (Creutzfeldt–Jakob disease)"],
+          "requirements": ["Depends on cause-specific treatment", "Supportive care & rehabilitation", "Nutritional management", "Palliative care if untreatable"]
+        }
+      ]
+    };
+
+    const select = document.getElementById("dementiaSelect");
+    const medsList = document.getElementById("medications");
+    const reqsList = document.getElementById("requirements");
+    const outputDiv = document.getElementById("output");
+    const reminderSection = document.getElementById("reminderSection");
+
+    dementiaData.dementiaTypes.forEach((type, index) => {
+      let option = document.createElement("option");
+      option.value = index;
+      option.textContent = type.name;
+      select.appendChild(option);
+    });
+
+    select.addEventListener("change", function() {
+      const selectedIndex = this.value;
+      medsList.innerHTML = "";
+      reqsList.innerHTML = "";
+      reminderSection.innerHTML = "";
+
+      if (selectedIndex !== "") {
+        const selected = dementiaData.dementiaTypes[selectedIndex];
+
+        selected.medications.forEach(med => {
+          let li = document.createElement("li");
+          li.textContent = med;
+          medsList.appendChild(li);
+        });
+
+        selected.requirements.forEach(req => {
+          let li = document.createElement("li");
+          li.textContent = req;
+          reqsList.appendChild(li);
+        });
+
+        selected.medications.forEach((med, idx) => {
+          let label = document.createElement("label");
+          label.textContent = `Set reminder for "${med}" (HH:MM):`;
+          let input = document.createElement("input");
+          input.type = "time";
+          input.id = `medTime${idx}`;
+          let button = document.createElement("button");
+          button.textContent = "Set Reminder";
+          button.addEventListener("click", () => {
+            const timeVal = input.value;
+            if (timeVal) {
+              alert(`Reminder set for ${med} at ${timeVal}`);
+            } else {
+              alert("Please select a time!");
+            }
+          });
+          reminderSection.appendChild(label);
+          reminderSection.appendChild(input);
+          reminderSection.appendChild(button);
+        });
+
+        outputDiv.style.display = "block";
+      } else {
+        outputDiv.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

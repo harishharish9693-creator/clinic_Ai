@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Multimedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-gradient: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    --card-bg: #ffffff;
+    --accent: #10b981;
+    --accent-hover: #059669;
+    --shadow: 0 8px 24px rgba(0,0,0,0.1);
+    --muted: #555;
+  }
+
+  body {
+    margin: 0; 
+    font-family: 'Poppins', sans-serif; 
+    background: var(--bg-gradient);
+    color: #111;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 900px; 
+    margin: 50px auto; 
+    background: var(--card-bg); 
+    padding: 30px; 
+    border-radius: 16px; 
+    box-shadow: var(--shadow);
+  }
+
+  h2 {
+    text-align: center; 
+    color: var(--accent); 
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    color: var(--accent); 
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  /* ===== MUSIC ===== */
+  #musicSection ul {
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 12px;
+  }
+
+  #musicList li {
+    background: #e2f0ea; 
+    padding: 15px 18px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    transition: all 0.3s;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  #musicList li:hover {
+    background: #cde7dc; 
+    transform: translateY(-3px);
+    color: var(--accent-hover);
+  }
+
+  audio {
+    width: 100%; 
+    margin-top: 15px; 
+    border-radius: 8px;
+  }
+
+  /* ===== PHOTO GALLERY ===== */
+  #photoGallery {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); 
+    gap: 15px;
+  }
+
+  #photoGallery img {
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  #photoGallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  @media(max-width:600px){
+    .container {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>User Multimedia Section</h2>
+
+  <!-- Music Player -->
+  <div id="musicSection">
+    <h3>Listen to Music</h3>
+    <ul id="musicList"></ul>
+    <audio id="audioPlayer" controls></audio>
+  </div>
+
+  <!-- Photo Gallery -->
+  <div id="photoSection" style="margin-top:40px;">
+    <h3>View Your Photos</h3>
+    <div id="photoGallery"></div>
+  </div>
+</div>
+
+<script>
+  // ================== MUSIC ==================
+  const musicList = [
+    {title:"Relaxing Piano", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+    {title:"Soft Guitar", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+    {title:"Ambient Music", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+    {title:"Calm Morning", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
+    {title:"Peaceful Night", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"}
+  ];
+
+  const musicUl = document.getElementById("musicList");
+  const audioPlayer = document.getElementById("audioPlayer");
+
+  musicList.forEach(song => {
+    const li = document.createElement("li");
+    li.textContent = song.title;
+    li.addEventListener("click", () => {
+      audioPlayer.src = song.file;
+      audioPlayer.play();
+    });
+    musicUl.appendChild(li);
+  });
+
+  // ================== PHOTO GALLERY ==================
+  const photos = [
+    "https://picsum.photos/id/1015/300/200",
+    "https://picsum.photos/id/1025/300/200",
+    "https://picsum.photos/id/1035/300/200",
+    "https://picsum.photos/id/1045/300/200",
+    "https://picsum.photos/id/1055/300/200",
+    "https://picsum.photos/id/1065/300/200",
+    "https://picsum.photos/id/1075/300/200"
+  ];
+
+  const gallery = document.getElementById("photoGallery");
+  photos.forEach(src => {
+    const img = document.createElement("img");
+    img.src = src;
+    gallery.appendChild(img);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Brain Exercises — Games</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-gradient: linear-gradient(135deg, #89f7fe, #66a6ff);
+      --card:#ffffff;
+      --accent:#1976d2;
+      --accent-hover:#0b66b2;
+      --muted:#555;
+      --success:#2e7d32;
+      --danger:#d32f2f;
+      --shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    body{
+      margin:0; font-family:'Poppins',system-ui,Arial,sans-serif;
+      background: var(--bg-gradient);
+      color:#111;
+      min-height:100vh;
+    }
+
+    header{
+      background:rgba(25,118,210,0.85);
+      color:white; padding:20px 24px;
+      display:flex; align-items:center; justify-content:space-between;
+      box-shadow:var(--shadow);
+      position:sticky; top:0; z-index:100;
+      border-bottom-left-radius:12px; border-bottom-right-radius:12px;
+    }
+    header h1{ font-size:20px; margin:0; }
+    header a{
+      color:white; text-decoration:none; 
+      background:rgba(255,255,255,0.15); padding:10px 16px; border-radius:10px;
+      font-size:14px; transition:0.3s;
+    }
+    header a:hover{ background:rgba(255,255,255,0.3); }
+
+    main{
+      padding:24px;
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      gap:18px;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    }
+
+    .card{
+      background:var(--card);
+      padding:20px;
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      transition:transform 0.2s;
+    }
+    .card:hover{ transform:translateY(-3px); }
+
+    .card h2{
+      margin:0 0 12px 0;
+      font-size:18px;
+      color:var(--accent);
+      display:flex; align-items:center; gap:8px;
+    }
+
+    .controls{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:10px; }
+    button{ cursor:pointer; border:none; background:var(--accent); color:white;
+      padding:10px 16px; border-radius:10px; font-weight:600; transition:0.3s; }
+    button:hover{ background:var(--accent-hover); transform:translateY(-2px); }
+    button.ghost{ background:transparent; color:var(--accent); border:1px solid rgba(25,118,210,0.3); }
+
+    #gameArea{ margin-top:12px; }
+
+    /* Memory styles */
+    #memoryBoard{ display:grid; gap:10px; justify-content:center; }
+    .memCard{
+      width:70px; height:70px;
+      display:flex; align-items:center; justify-content:center;
+      background:#e9eef8; border-radius:10px;
+      font-size:24px; cursor:pointer; user-select:none;
+      transition:0.3s;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    }
+    .memCard.flipped{ background:var(--accent); color:white; }
+
+    input[type="number"], input[type="text"]{
+      padding:8px; border-radius:6px; border:1px solid #ccc; font-size:14px;
+    }
+    .small{ font-size:13px; color:var(--muted); }
+
+    /* Sudoku */
+    #sudokuBoard{
+      display:grid; grid-template-columns: repeat(9, 45px); gap:4px; justify-content:center;
+    }
+    .sCell{ width:45px; height:45px; display:flex; align-items:center; justify-content:center;
+      font-size:16px; border-radius:6px; background:#f5f5f5; border:1px solid #cfd8dc;
+      transition:0.2s;
+    }
+    .sCell input{ width:100%; height:100%; border:0; outline:none; text-align:center; background:transparent; font-size:16px; }
+    .given{ background:#e0e0e0; font-weight:600; }
+    .sCell.block-right{ border-right:2px solid #90a4ae; }
+    .sCell.block-bottom{ border-bottom:2px solid #90a4ae; }
+
+    footer{
+      text-align:center; color:var(--muted);
+      padding:28px 8px; font-size:13px;
+    }
+
+    @media (max-width:520px){
+      .memCard{ width:56px; height:56px; font-size:20px; }
+      .sCell{ width:36px; height:36px; }
+      #sudokuBoard{ gap:3px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 Brain Exercises</h1>
+    <a href="index.html">⬅ Back to Dashboard</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Choose a Game</h2>
+      <div class="controls">
+        <button onclick="startMemory()">🎴 Memory Match</button>
+        <button onclick="startMath()">➕ Quick Math</button>
+        <button onclick="startReaction()">⚡ Reaction Test</button>
+        <button onclick="startWord()">🔤 Word Scramble</button>
+        <button onclick="startNumber()">🎲 Number Guess</button>
+        <button onclick="startSudoku()">🔢 Sudoku (9×9)</button>
+      </div>
+      <div class="small">Tip: caregivers can open this on a tablet. Games are simple, lightweight, and local-only.</div>
+    </div>
+
+    <div class="card">
+      <h2 id="gameTitle">Game Area</h2>
+      <div id="gameArea">
+        <p class="small">Select a game to begin.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>How to Use</h2>
+      <ol style="padding-left:18px; margin:0 0 8px 0;">
+        <li>Pick a game from the left controls.</li>
+        <li>Follow on-screen instructions; feedback shown via alerts.</li>
+        <li>For Sudoku use the "Check" button to validate.</li>
+      </ol>
+      <div class="small">All games run locally — no server required.</div>
+    </div>
+  </main>
+
+  <footer>Built for patient brain exercises • Simple & easy • Professional UI</footer>
+
+  <script>
+     // Utility
+    const gameTitle = document.getElementById('gameTitle');
+    const gameArea = document.getElementById('gameArea');
+
+    // ---------------- Memory Match ----------------
+    function startMemory(){
+      gameTitle.textContent = '🎴 Memory Match';
+      // 8 pairs (16 cards)
+      const symbols = ['🍎','🍊','🍇','🍓','🍒','🍍','🥭','🍉'];
+      const cards = shuffle([...symbols, ...symbols]);
+      gameArea.innerHTML = '<div id="memoryBoard"></div><div class="small" id="memInfo"></div>';
+      const board = document.getElementById('memoryBoard');
+      board.style.gridTemplateColumns = 'repeat(4,70px)';
+      board.innerHTML = '';
+      let first = null, second = null, lock=false, matches=0;
+      cards.forEach((sym, i) => {
+        const d = document.createElement('div');
+        d.className = 'memCard';
+        d.dataset.value = sym;
+        d.addEventListener('click', () => {
+          if(lock || d.classList.contains('revealed')) return;
+          d.textContent = sym; d.classList.add('flipped','revealed');
+          if(!first) first = d;
+          else if(!second){
+            second = d; lock=true;
+            setTimeout(()=> {
+              if(first.dataset.value === second.dataset.value){
+                first.style.visibility = 'visible'; second.style.visibility = 'visible';
+                matches += 1;
+                document.getElementById('memInfo').textContent = `Matches: ${matches}/${symbols.length}`;
+                if(matches === symbols.length){
+                  alert('🎉 All pairs found! Good job.');
+                }
+              } else {
+                first.textContent=''; second.textContent=''; first.classList.remove('flipped','revealed'); second.classList.remove('flipped','revealed');
+              }
+              first = second = null; lock=false;
+            }, 800);
+          }
+        });
+        board.appendChild(d);
+      });
+      document.getElementById('memInfo').textContent = 'Matches: 0/'+symbols.length;
+    }
+
+    // ---------------- Math Game ----------------
+    function startMath(){
+      gameTitle.textContent = '➕ Quick Math';
+      const a = randInt(10, 50), b = randInt(10, 50);
+      gameArea.innerHTML = `
+        <div><p>Solve: <strong>${a} + ${b}</strong></p>
+        <input id="mathAns" type="number" placeholder="Your answer" /> 
+        <button onclick="checkMath(${a + b})">Check</button></div>
+        <div class="small">Try to answer without a calculator for brain exercise.</div>
+      `;
+    }
+    function checkMath(correct){
+      const val = Number(document.getElementById('mathAns').value);
+      if(Number.isNaN(val)) return alert('Please enter a number.');
+      if(val === correct) alert('✅ Correct! Nice work.');
+      else alert(`❌ Not quite. The correct answer is ${correct}.`);
+    }
+
+    // ---------------- Reaction Test ----------------
+    let reactionTimer = null;
+    function startReaction(){
+      gameTitle.textContent = '⚡ Reaction Test';
+      gameArea.innerHTML = `<p>Wait for the screen to turn green, then click the button as fast as you can.</p>
+        <div id="reactionBox" style="margin-top:10px;">
+          <button id="reactBtn" class="ghost" disabled style="padding:18px 26px; font-size:16px">Wait...</button>
+        </div>
+        <div class="small" id="reactResult"></div>`;
+      const btn = document.getElementById('reactBtn');
+      const res = document.getElementById('reactResult');
+      btn.disabled = true; btn.style.background='transparent'; btn.style.color='var(--accent)'; res.textContent='';
+      const wait = randInt(1500, 4500);
+      setTimeout(()=> {
+        btn.disabled = false; btn.style.background='var(--accent)'; btn.style.color='white'; btn.textContent='CLICK!';
+        const start = performance.now();
+        btn.onclick = () => {
+          const dt = performance.now() - start;
+          res.textContent = `Reaction time: ${Math.round(dt)} ms`;
+          alert(`Reaction time: ${Math.round(dt)} ms`);
+          btn.disabled = true; btn.textContent='Done';
+        };
+      }, wait);
+    }
+
+    // ---------------- Word Scramble ----------------
+    function startWord(){
+      gameTitle.textContent = '🔤 Word Scramble';
+      const words = ['memory','puzzle','garden','family','health','orange','river','doctor'];
+      const w = words[randInt(0, words.length-1)];
+      const scrambled = shuffleArray(w.split('')).join('');
+      gameArea.innerHTML = `
+        <p>Unscramble:</p><h3>${scrambled}</h3>
+        <input id="wordInput" placeholder="Type the word" />
+        <button onclick="checkWord('${w}')">Check</button>
+        <div class="small">Hint: It's a common English word.</div>
+      `;
+    }
+    function checkWord(correct){
+      const val = document.getElementById('wordInput').value.trim().toLowerCase();
+      if(!val) return alert('Type your guess first.');
+      if(val === correct) alert('✅ Correct! Well done.');
+      else alert(`❌ Not correct. The word was "${correct}".`);
+    }
+
+    // ---------------- Number Guess ----------------
+    let currentNumber = null;
+    function startNumber(){
+      gameTitle.textContent = '🎲 Number Guessing';
+      currentNumber = randInt(1, 50);
+      gameArea.innerHTML = `
+        <p>Guess the number between 1 and 50.</p>
+        <input id="guessVal" type="number" min="1" max="50" />
+        <button onclick="checkGuess()">Check</button>
+        <div class="small" id="guessHint"></div>
+      `;
+      document.getElementById('guessHint').textContent = 'You have unlimited tries.';
+    }
+    function checkGuess(){
+      const val = Number(document.getElementById('guessVal').value);
+      if(!val) return alert('Enter a number between 1 and 50.');
+      if(val === currentNumber){ alert('🎉 Correct! You found it.'); }
+      else if(val > currentNumber){ document.getElementById('guessHint').textContent = 'Too high. Try lower.'; }
+      else { document.getElementById('guessHint').textContent = 'Too low. Try higher.'; }
+    }
+
+    // ---------------- Sudoku ----------------
+    // We'll present a prefilled 9x9 puzzle and allow user to fill blanks.
+    // "given" cells are non-editable. "Check" validates rows, cols, blocks.
+    function startSudoku(){
+      gameTitle.textContent = '🔢 Sudoku (9×9)';
+      // A simple starter puzzle (0 = empty)
+      const puzzle = [
+        [5,3,0, 0,7,0, 0,0,0],
+        [6,0,0, 1,9,5, 0,0,0],
+        [0,9,8, 0,0,0, 0,6,0],
+
+        [8,0,0, 0,6,0, 0,0,3],
+        [4,0,0, 8,0,3, 0,0,1],
+        [7,0,0, 0,2,0, 0,0,6],
+
+        [0,6,0, 0,0,0, 2,8,0],
+        [0,0,0, 4,1,9, 0,0,5],
+        [0,0,0, 0,8,0, 0,7,9],
+      ];
+      // Display board
+      gameArea.innerHTML = `<div id="sudokuBoard"></div>
+        <div style="margin-top:10px;">
+          <button onclick="checkSudoku()">Check</button>
+          <button onclick="resetSudoku()">Reset</button>
+          <button onclick="solveSudoku()">Show Solution</button>
+          <div class="small" id="sudokuMsg"></div>
+        </div>`;
+      const board = document.getElementById('sudokuBoard');
+      board.innerHTML = '';
+      board.style.gridTemplateColumns = 'repeat(9,40px)';
+      // store initial and current
+      window._sudoku = { initial: deepCopy(puzzle), current: deepCopy(puzzle) };
+      for(let r=0;r<9;r++){
+        for(let c=0;c<9;c++){
+          const cell = document.createElement('div');
+          cell.className = 'sCell';
+          // thicker borders for 3x3 blocks
+          if((c+1)%3===0 && c!==8) cell.classList.add('block-right');
+          if((r+1)%3===0 && r!==8) cell.classList.add('block-bottom');
+
+          if(puzzle[r][c] !== 0){
+            cell.classList.add('given');
+            cell.innerHTML = `<div>${puzzle[r][c]}</div>`;
+          } else {
+            const inp = document.createElement('input');
+            inp.type = 'text';
+            inp.maxLength = 1;
+            inp.inputMode = 'numeric';
+            inp.pattern = '[1-9]';
+            inp.oninput = (e)=> {
+              const v = e.target.value.replace(/[^1-9]/g,'').slice(0,1);
+              e.target.value = v;
+              window._sudoku.current[r][c] = v === '' ? 0 : Number(v);
+            };
+            cell.appendChild(inp);
+          }
+          board.appendChild(cell);
+        }
+      }
+    }
+
+    function checkSudoku(){
+      const msg = document.getElementById('sudokuMsg');
+      const grid = window._sudoku && window._sudoku.current;
+      if(!grid) return alert('No puzzle loaded.');
+      // validate each row, col, block
+      function is1to9(arr){
+        const s = arr.filter(n=>n>0);
+        if(s.length !== 9) return false;
+        const set = new Set(s);
+        if(set.size !== 9) return false;
+        return [...set].every(v => v>=1 && v<=9);
+      }
+      // check all rows and columns and blocks
+      const rowsOk = grid.every(row => row.every(n=>n>=1 && n<=9));
+      if(!rowsOk) { msg.textContent = '⚠ Fill all cells with numbers 1-9 before checking.'; return; }
+      // rows
+      for(let r=0;r<9;r++){
+        const s = new Set(grid[r]);
+        if(s.size !== 9){ msg.textContent = '❌ Row check failed.'; return; }
+      }
+      // cols
+      for(let c=0;c<9;c++){
+        const col = [];
+        for(let r=0;r<9;r++) col.push(grid[r][c]);
+        const s = new Set(col);
+        if(s.size !==9){ msg.textContent = '❌ Column check failed.'; return; }
+      }
+      // blocks
+      for(let br=0;br<3;br++){
+        for(let bc=0;bc<3;bc++){
+          const block=[];
+          for(let r=br*3;r<br*3+3;r++){
+            for(let c=bc*3;c<bc*3+3;c++){
+              block.push(grid[r][c]);
+            }
+          }
+          if((new Set(block)).size !== 9){ msg.textContent = '❌ 3x3 block check failed.'; return; }
+        }
+      }
+      msg.textContent = '✅ Sudoku looks valid!';
+      alert('✅ Well done — Sudoku is valid.');
+    }
+
+    function resetSudoku(){
+      if(!window._sudoku) return;
+      const init = window._sudoku.initial;
+      window._sudoku.current = deepCopy(init);
+      // Re-render quickly by starting sudoku again (simpler)
+      startSudoku();
+      document.getElementById('sudokuMsg').textContent = 'Board reset.';
+    }
+
+    // Very simple backtracking solver for "Show Solution" (works for this puzzle)
+    function solveSudoku(){
+      if(!window._sudoku) return;
+      const grid = deepCopy(window._sudoku.initial);
+      function isSafe(g, r, c, v){
+        for(let i=0;i<9;i++){
+          if(g[r][i] === v) return false;
+          if(g[i][c] === v) return false;
+        }
+        const br = Math.floor(r/3)*3, bc = Math.floor(c/3)*3;
+        for(let rr=br;rr<br+3;rr++) for(let cc=bc;cc<bc+3;cc++) if(g[rr][cc]===v) return false;
+        return true;
+      }
+      function solve(g){
+        for(let r=0;r<9;r++){
+          for(let c=0;c<9;c++){
+            if(g[r][c]===0){
+              for(let v=1; v<=9; v++){
+                if(isSafe(g,r,c,v)){
+                  g[r][c]=v;
+                  if(solve(g)) return true;
+                  g[r][c]=0;
+                }
+              }
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+      const success = solve(grid);
+      if(!success) return alert('No solution found.');
+      // Set solved grid to UI
+      window._sudoku.current = grid;
+      // render filled board
+      const board = document.getElementById('sudokuBoard');
+      if(!board) return;
+      const inputs = board.querySelectorAll('input');
+      // fill inputs with solution in order
+      let idx = 0;
+      for(let r=0;r<9;r++){
+        for(let c=0;c<9;c++){
+          if(window._sudoku.initial[r][c] === 0){
+            const val = grid[r][c];
+            if(inputs[idx]) inputs[idx].value = val;
+            idx++;
+          } else {
+            // given cells don't count towards inputs
+          }
+        }
+      }
+      document.getElementById('sudokuMsg').textContent = 'Solution filled in.';
+    }
+
+    // ---------------- Helpers ----------------
+    function shuffle(arr){
+      const a = arr.slice();
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    function shuffleArray(a){ return shuffle(a); }
+    function randInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+    function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
+
+    // init with Memory by default
+    startMemory();
+  </script>
+</body>
+</html>

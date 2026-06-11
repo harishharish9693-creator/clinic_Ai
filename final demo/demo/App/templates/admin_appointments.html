@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Admin - Appointments</title>
+  <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/css/main.css" rel="stylesheet">
+</head>
+<body class="py-4">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h1 class="h3">Admin - Appointments</h1>
+      <a href="/index" class="btn btn-outline-secondary">Back to site</a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Department</th>
+            <th>Date</th>
+            <th>Requested Doctor</th>
+            <th>Message</th>
+            <th>Assigned Doctor</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in appointments %}
+          <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ a.name }}</td>
+            <td>{{ a.email }}</td>
+            <td>{{ a.phone }}</td>
+            <td>{{ a.department }}</td>
+            <td>{{ a.date }}</td>
+            <td>{{ a.doctor }}</td>
+            <td style="max-width: 260px; white-space: pre-wrap;">{{ a.message }}</td>
+            <td>{{ a.assigned_doctor or '-' }}</td>
+            <td>
+              <span class="badge {% if a.status == 'pending' %}text-bg-warning{% elif a.status == 'assigned' %}text-bg-primary{% elif a.status == 'completed' %}text-bg-success{% else %}text-bg-secondary{% endif %}">
+                {{ a.status or 'pending' }}
+              </span>
+            </td>
+            <td>
+              <form action="/admin/assign" method="post" class="d-flex gap-2">
+                <input type="hidden" name="appointment_id" value="{{ a.id }}">
+                <input type="text" name="assigned_doctor" class="form-control" placeholder="Assign doctor" value="{{ a.assigned_doctor or '' }}" required>
+                <select name="status" class="form-select">
+                  <option value="pending" {% if a.status=='pending' %}selected{% endif %}>pending</option>
+                  <option value="assigned" {% if a.status=='assigned' %}selected{% endif %}>assigned</option>
+                  <option value="completed" {% if a.status=='completed' %}selected{% endif %}>completed</option>
+                </select>
+                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="11" class="text-center">No appointments yet.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+

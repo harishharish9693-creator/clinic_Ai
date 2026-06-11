@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Family Contacts</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; 
+      padding: 20px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #333;
+    }
+    h2 {
+      text-align: center; 
+      color: #fff; 
+      margin-bottom: 20px;
+      font-size: 28px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+    .container {
+      max-width: 600px; 
+      margin: auto; 
+      background: #ffffff;
+      padding: 25px; 
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+    h3 {
+      color: #3f51b5;
+      margin-top: 25px;
+    }
+    .contact-card {
+      background: #f9f9f9; 
+      padding: 15px; 
+      margin: 12px 0; 
+      border-radius: 10px; 
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+    .contact-card strong { 
+      font-size: 18px; 
+      color: #3f51b5; 
+    }
+    .contact-card button { 
+      margin: 6px; 
+      padding: 10px 16px; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-size: 14px; 
+      transition: background 0.3s ease;
+    }
+    .contact-card button.call { background: #4caf50; color: white; }
+    .contact-card button.call:hover { background: #388e3c; }
+    .contact-card button.sms { background: #ff9800; color: white; }
+    .contact-card button.sms:hover { background: #ef6c00; }
+    input {
+      padding: 10px; 
+      margin: 5px; 
+      width: calc(50% - 18px);
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+      font-size: 15px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+    button.add {
+      background: #3f51b5; 
+      color: white; 
+      padding: 12px 18px; 
+      border: none; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-size: 16px; 
+      width: 100%;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+    button.add:hover { background: #283593; }
+    .music-player {
+      margin-top: 25px;
+      text-align: center;
+      background: #f0f3ff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .music-player h4 {
+      margin-bottom: 10px;
+      color: #3f51b5;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h2>👨‍👩‍👦 Family Contacts</h2>
+  <div class="container">
+    <div id="contactList">
+      {% for c in contacts %}
+        <div class="contact-card">
+          <strong>{{ c.name }}</strong> - {{ c.phone }}<br>
+          <button class="call" onclick="alert('📞 Calling {{ c.phone }}...')">📞 Call</button>
+          <button class="sms" onclick="alert('✉ Sending SMS to {{ c.phone }}...')">✉ SMS</button>
+        </div>
+      {% else %}
+        <p>No contacts yet. Add one below.</p>
+      {% endfor %}
+    </div>
+
+    <h3>Add New Contact</h3>
+    <form method="post" action="/family">
+      <input name="name" placeholder="Name" required>
+      <input name="phone" placeholder="Phone" required>
+      <button class="add" type="submit">➕ Add Contact</button>
+    </form>
+
+    <!-- 🎶 Music Player -->
+    <div class="music-player">
+      <h4>🎶 Relaxing Music</h4>
+      <audio controls loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <script></script>
+</body>
+</html>

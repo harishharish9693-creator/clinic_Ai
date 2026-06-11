@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>MAX CMR</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="static/assets/img/favicon.png" rel="icon">
+  <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="static/assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="bgCarrier" stroke-width="0"></g>
+          <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="iconCarrier">
+            <path d="M22 22L2 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path d="M17 22V6C17 4.11438 17 3.17157 16.4142 2.58579C15.8284 2 14.8856 2 13 2H11C9.11438 2 8.17157 2 7.58579 2.58579C7 3.17157 7 4.11438 7 6V22" stroke="currentColor" stroke-width="1.5"></path>
+            <path opacity="0.5" d="M21 22V8.5C21 7.09554 21 6.39331 20.6629 5.88886C20.517 5.67048 20.3295 5.48298 20.1111 5.33706C19.6067 5 18.9045 5 17.5 5" stroke="currentColor" stroke-width="1.5"></path>
+            <path opacity="0.5" d="M3 22V8.5C3 7.09554 3 6.39331 3.33706 5.88886C3.48298 5.67048 3.67048 5.48298 3.88886 5.33706C4.39331 5 5.09554 5 6.5 5" stroke="currentColor" stroke-width="1.5"></path>
+            <path d="M12 22V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M10 12H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M5.5 11H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M5.5 14H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M17 11H18.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M17 14H18.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M5.5 8H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M17 8H18.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path opacity="0.5" d="M10 15H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path d="M12 9V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M14 7L10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </g>
+        </svg>
+
+       
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="/index" class="active">Home</a></li>
+        <li><a href="/appointment">Appointment</a></li>
+
+         
+          <li><a href="/family">Family contacts</a></li>
+              <li><a href="/panic">panic</a></li>
+              <li><a href="/dementia">Dementia type</a></li>
+             <li style="display:flex; align-items:center; gap:6px;">
+               <label for="langSelect" style="margin:0; font-size:14px;">Language</label>
+               <select id="langSelect" aria-label="Select language" style="padding:6px 8px; border-radius:6px; border:1px solid #ddd;">
+                 <option value="en">English</option>
+                 <option value="hi">हिन्दी</option>
+                 <option value="es">Español</option>
+                 <option value="fr">Français</option>
+                 <option value="de">Deutsch</option>
+               </select>
+             </li>
+         
+         {% if session.get('user_id') %}
+           {% if session.get('role') == 'admin' %}
+             <li><a href="/admin/appointments">Admin</a></li>
+           {% elif session.get('role') == 'doctor' %}
+             <li><a href="/doctor/dashboard">Doctor</a></li>
+           {% else %}
+             <li><a href="/patient/dashboard">My Appointments</a></li>
+           {% endif %}
+           <li><a href="/logout">Logout ({{ session.get('username') }})</a></li>
+         {% else %}
+           <li><a href="/login">Sign in</a></li>
+           <li><a href="/register">Sign up</a></li>
+         {% endif %}
+
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="/max_ai">MAX AI</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      <div class="container-fluid p-0">
+        <div class="hero-wrapper">
+          <div class="hero-image">
+            <img src="static/assets/img/health/neurology-2.webp" alt="Dementia and Neurology Care" class="img-fluid">
+          </div>
+
+          <div class="hero-content">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-7 col-md-10" data-aos="fade-right" data-aos-delay="100">
+                  <div class="content-box">
+                    <span class="badge-accent" data-aos="fade-up" data-aos-delay="150">Leading Healthcare Specialists</span>
+                    <h1 data-aos="fade-up" data-aos-delay="200">Advanced Medical Care for Your Family's Health</h1>
+                    <p data-aos="fade-up" data-aos-delay="250">Every Memory That Matters</p>
+
+                    <div class="cta-group" data-aos="fade-up" data-aos-delay="300">
+                      <a href="/appointment" class="btn btn-primary">Book Appointment</a>
+                      <a href="services.html" class="btn btn-outline">Explore Services</a>
+                    </div>
+
+                    <div class="info-badges" data-aos="fade-up" data-aos-delay="350">
+                      <div class="badge-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <div class="badge-content">
+                          <span>Emergency Line</span>
+                          <strong>+91 7981604430</strong>
+                        </div>
+                      </div>
+                      <div class="badge-item">
+                        <i class="bi bi-clock-fill"></i>
+                        <div class="badge-content">
+                          <span>Working Hours</span>
+                          <strong>24hrs</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="features-wrapper">
+                <div class="row gy-4">
+
+                  <div class="col-lg-4">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="450">
+                      <div class="feature-icon">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                      </div>
+                      <div class="feature-text">
+                        <h3>Nuroanatomy</h3>
+                        <p></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="500">
+                      <div class="feature-icon">
+                        <i class="bi bi-lungs-fill"></i>
+                      </div>
+                      <div class="feature-text">
+                        <h3>Celular And Molecular neuroscience</h3>
+                        <p></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="550">
+                      <div class="feature-icon">
+                        <i class="bi bi-capsule"></i>
+                      </div>
+                      <div class="feature-text">
+                        <h3>Nerogenetics</h3>
+                        <p></p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Hero Section -->
+
+    <!-- Home About Section -->
+    <section id="home-about" class="home-about section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-5 align-items-center">
+          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="about-image">
+              <img src="static/assets/img/health/facilities-1.webp" alt="Modern Healthcare Facility" class="img-fluid rounded-3 mb-4">
+              <div class="experience-badge">
+                <span class="years">25+</span>
+                <span class="text">Years of Excellence</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="about-content">
+              <h2>Committed to Exceptional Patient Care</h2>
+              <p class="lead">"We are deeply committed to providing exceptional patient care for individuals living with dementia, focusing not just on medical support, but also on emotional well-being, dignity, and quality of life. Our approach is grounded in compassion, patience, and a deep understanding of the challenges dementia brings — not only for the individual, but also for their families and caregivers. We strive to create a safe, respectful, and enriching environment tailored to each person's history, preferences, and needs."
+</p>
+
+              <p>Commonly recognized categories such as the ones below offer a sense of the breadth and diversity of neuroscience as an endeavor. Among the other fields of neuroscience are neuroanatomy, cellular and molecular neuroscience, an</p>
+
+              <div class="row g-4 mt-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                  <div class="feature-item">
+                    <div class="icon">
+                      <i class="bi bi-heart-pulse"></i>
+                    </div>
+                    <h4>Compassionate Care</h4>
+                    <p>Compassionate care in hospitals means treating patients not only for their medical needs but also with empathy, kindness, and respect. It goes beyond medicine and technology to focus on the emotional, psychological, and human side of healing.</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+                  <div class="feature-item">
+                    <div class="icon">
+                      <i class="bi bi-star"></i>
+                    </div>
+                    <h4>Medical Excellence</h4>
+                    <p>Medical excellence refers to providing the highest standard of healthcare by combining advanced medical knowledge, modern technology, ethical practices, and compassionate care to achieve the best outcomes for patients..</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cta-wrapper mt-4">
+               
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5 pt-4 certifications-row" data-aos="fade-up" data-aos-delay="600">
+          <div class="col-12 text-center mb-4">
+            <h4 class="certification-title">Our Accreditations</h4>
+          </div>
+          <div class="col-12">
+            <div class="certifications">
+              <div class="certification-item" data-aos="zoom-in" data-aos-delay="700">
+                <img src="static/assets/img/clients/clients-1.webp" alt="Certification">
+              </div>
+              <div class="certification-item" data-aos="zoom-in" data-aos-delay="800">
+                <img src="static/assets/img/clients/clients-2.webp" alt="Certification">
+              </div>
+              <div class="certification-item" data-aos="zoom-in" data-aos-delay="900">
+                <img src="static/assets/img/clients/clients-3.webp" alt="Certification">
+              </div>
+              <div class="certification-item" data-aos="zoom-in" data-aos-delay="1000">
+                <img src="static/assets/img/clients/clients-4.webp" alt="Certification">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Home About Section -->
+
+    <!-- Featured Departments Section -->
+    <section id="featured-departments" class="featured-departments section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Featured Departments</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="department-card">
+              <div class="department-image">
+                <img src="static/assets/img/health/cardiology-3.webp" alt="Cardiology Department" class="img-fluid">
+              </div>
+              <div class="department-content">
+                <div class="department-icon">
+                  <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Neuroanatomy</h3>
+                <p>Neuroanatomy is the study of the structure and organization of the nervous system, including the brain, spinal cord, and nerves. It explains how different parts of the nervous system are connected and how they control body functions.</p>
+                <a href="department-details.html" class="btn-learn-more">
+                  <span>Learn More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Department Card -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="department-card">
+              <div class="department-image">
+                <img src="static/assets/img/health/neurology-2.webp" alt="Neurology Department" class="img-fluid">
+              </div>
+              <div class="department-content">
+                <div class="department-icon">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <h3>Neurology</h3>
+                <p>Expert neurological care specializing in brain and nervous system disorders, providing cutting-edge treatments and compassionate support for neurological conditions.</p>
+                <a href="department-details.html" class="btn-learn-more">
+                  <span>Learn More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Department Card -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="department-card">
+              <div class="department-image">
+                <img src="static/assets/img/health/orthopedics-4.webp" alt="Orthopedics Department" class="img-fluid">
+              </div>
+              <div class="department-content">
+                <div class="department-icon">
+                  <i class="fas fa-bone"></i>
+                </div>
+                <h3>Neurogenetics</h3>
+                <p>Neurogenetics is the branch of science that studies how genes influence the development, function, and disorders of the nervous system. It combines neurology (study of the nervous system) and genetics (study of heredity).</p>
+                <a href="department-details.html" class="btn-learn-more">
+                  <span>Learn More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Department Card -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="department-card">
+              <div class="department-image">
+                <img src="static/assets/img/health/pediatrics-3.webp" alt="Pediatrics Department" class="img-fluid">
+              </div>
+              <div class="department-content">
+                <div class="department-icon">
+                  <i class="fas fa-baby"></i>
+                </div>
+                <h3>cellular and molecular neuroscience</h3>
+                <p>Cellular and molecular neuroscience is the branch of neuroscience that studies the nervous system at the level of cells (neurons and glial cells) and molecules (proteins, DNA, RNA, neurotransmitters). It explains how these microscopic components work together to control brain function and behavior.</p>
+                <a href="department-details.html" class="btn-learn-more">
+                  <span>Learn More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Department Card -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="department-card">
+              <div class="department-image">
+                <img src="static/assets/img/health/oncology-4.webp" alt="Oncology Department" class="img-fluid">
+              </div>
+              <div class="department-content">
+                <div class="department-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Oncology</h3>
+                <p>Comprehensive cancer care with multidisciplinary approach, offering advanced treatment options, clinical trials, and compassionate support throughout the cancer journey.</p>
+                <a href="department-details.html" class="btn-learn-more">
+                  <span>Learn More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Department Card -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="department-card">
+              <div class="department-image">
+                <img src="static/assets/img/health/emergency-2.webp" alt="Emergency Department" class="img-fluid">
+              </div>
+              <div class="department-content">
+                <div class="department-icon">
+                  <i class="fas fa-ambulance"></i>
+                </div>
+                <h3>Emergency Care</h3>
+                <p>Round-the-clock emergency medical services with rapid response capabilities, state-of-the-art equipment, and experienced emergency physicians for critical care.</p>
+                <a href="department-details.html" class="btn-learn-more">
+                  <span>Learn More</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Department Card -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Departments Section -->
+
+    <!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Featured Services</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <div class="service-content">
+                <h3>Cardiology Excellence</h3>
+                <p>Featured services in a hospital are the specialized, high-quality medical departments that define its strengths.</p>
+                <ul class="service-features">
+                  <li><i class="fas fa-check-circle"></i>Advanced Heart Surgery</li>
+                  <li><i class="fas fa-check-circle"></i>24/7 Emergency Care</li>
+                  <li><i class="fas fa-check-circle"></i>Preventive Screenings</li>
+                </ul>
+                <a href="services.html" class="service-btn">
+                  Learn More
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="service-content">
+                <h3>Neurology &amp; Brain Health</h3>
+                <p>Neurology is the branch of medicine that deals with the study, diagnosis, and treatment of disorders of the nervous system, which includes the brain, spinal cord, nerves, and muscles.</p>
+                <ul class="service-features">
+                  <li><i class="fas fa-check-circle"></i>Brain Imaging &amp; Diagnostics</li>
+                  <li><i class="fas fa-check-circle"></i>Stroke Treatment Center</li>
+                  <li><i class="fas fa-check-circle"></i>Neurological Rehabilitation</li>
+                </ul>
+                <a href="services.html" class="service-btn">
+                  Learn More
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+<!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-ambulance"></i>
+              </div>
+              <div class="service-content">
+                <h3>Emergency &amp; Trauma Care</h3>
+                <p>In healthcare, an emergency is a sudden, serious, and often unexpected situation that requires immediate medical attention to prevent death or severe harm.</p>
+                <ul class="service-features">
+                  <li><i class="fas fa-check-circle"></i>24/7 Emergency Department</li>
+                  <li><i class="fas fa-check-circle"></i>Level 1 Trauma Center</li>
+                  <li><i class="fas fa-check-circle"></i>Critical Care Units</li>
+                </ul>
+                <a href="services.html" class="service-btn">
+                  Learn More
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+          <!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-card">
+              <div class="service-icon">
+                <i class="fas fa-ambulance"></i>
+              </div>
+              <div class="service-content">
+                <h3>Trauma Care</h3>
+                <p>In healthcare, an emergency is a sudden, serious, and often unexpected situation that requires immediate medical attention to prevent death or severe harm.</p>
+                <ul class="service-features">
+                  <li><i class="fas fa-check-circle"></i>24/7 Emergency Department</li>
+                 
+                  <li><i class="fas fa-check-circle"></i>Critical Care Units</li>
+                </ul>
+                <a href="services.html" class="service-btn">
+                  Learn More
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Featured Services Section -->
+
+    <!-- Quick Access Section -->
+    <section id="quick-access" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Quick Access</h2>
+        <p>Jump right into helpful areas</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+          <div class="col-lg-3 col-md-6">
+            <a href="/games" class="text-decoration-none">
+              <div class="department-card">
+                <div class="department-image">
+                  <img src="static/assets/img/quick/games.webp" alt="Games" class="img-fluid">
+                </div>
+                <div class="department-content">
+                  <div class="department-icon"><i class="bi bi-controller"></i></div>
+                  <h3>Games</h3>
+                  <p>Brain exercises and simple games</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <a href="/books" class="text-decoration-none">
+              <div class="department-card">
+                <div class="department-image">
+                  <img src="static/assets/img/quick/books.webp" alt="Books" class="img-fluid">
+                </div>
+                <div class="department-content">
+                  <div class="department-icon"><i class="bi bi-book"></i></div>
+                  <h3>Books</h3>
+                  <p>Reading resources and materials</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <a href="/music" class="text-decoration-none">
+              <div class="department-card">
+                <div class="department-image">
+                  <img src="static/assets/img/quick/music.webp" alt="Music" class="img-fluid">
+                </div>
+                <div class="department-content">
+                  <div class="department-icon"><i class="bi bi-music-note-beamed"></i></div>
+                  <h3>Music</h3>
+                  <p>Relaxing and familiar music</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <a href="/caregiver" class="text-decoration-none">
+              <div class="department-card">
+                <div class="department-image">
+                  <img src="static/assets/img/quick/caregiver.webp" alt="Caregiver" class="img-fluid">
+                </div>
+                <div class="department-content">
+                  <div class="department-icon"><i class="bi bi-person-heart"></i></div>
+                  <h3>Caregivers</h3>
+                  <p>Guides and tools for caregivers</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Quick Access Section -->
+
+    <!-- Find A Doctor Section -->
+    <section id="find-a-doctor" class="find-a-doctor section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Find A Doctor</h2>
+        <p>“Find a doctor” is a service that connects patients with the right healthcare specialist quickly and conveniently, ensuring better treatment and patient satisfaction.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-12">
+            <div class="search-container">
+              <form class="search-form" action="forms/doctor-search.php" method="get">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" name="doctor_name" placeholder="Doctor name or keyword">
+                  </div>
+                  <div class="col-md-4">
+                    <select class="form-select" name="specialty" id="specialty-select">
+                      <option value="">Select Specialty</option>
+                      <option value="cardiology">Cardiology</option>
+                      <option value="neurology">Neurology</option>
+                      <option value="orthopedics">Orthopedics</option>
+                      <option value="pediatrics">Pediatrics</option>
+                      <option value="dermatology">Dermatology</option>
+                      <option value="oncology">Oncology</option>
+                      <option value="surgery">Surgery</option>
+                      <option value="emergency">Emergency Medicine</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary w-100">
+                      <i class="bi bi-search me-2"></i>Search Doctor
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="400">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="static/assets/img/health/staff-3.webp" alt="Dr. Sarah Mitchell" class="img-fluid">
+                <div class="availability-badge online">Available</div>
+              </div>
+              <div class="doctor-info">
+                <h5>Dr. Sarah Mitchell</h5>
+                <p class="specialty">Cardiology</p>
+                <p class="experience">15+ years experience</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <span class="rating-text">(4.9)</span>
+                </div>
+                <div class="appointment-actions">
+                  <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                  <a href="#" class="btn btn-primary btn-sm">Book Appointment</a>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Doctor Card -->
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="static/assets/img/health/staff-7.webp" alt="Dr. Michael Rodriguez" class="img-fluid">
+                <div class="availability-badge busy">In Surgery</div>
+              </div>
+              <div class="doctor-info">
+                <h5>Dr. Michael Rodriguez</h5>
+                <p class="specialty">Neurology</p>
+                <p class="experience">12+ years experience</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                  <span class="rating-text">(4.7)</span>
+                </div>
+                <div class="appointment-actions">
+                  <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                  <a href="#" class="btn btn-primary btn-sm">Book Appointment</a>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Doctor Card -->
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="static/assets/img/health/staff-1.webp" alt="Dr. Emily Chen" class="img-fluid">
+                <div class="availability-badge online">Available</div>
+              </div>
+              <div class="doctor-info">
+                <h5>Dr. Emily Chen</h5>
+                <p class="specialty">Pediatrics</p>
+                <p class="experience">8+ years experience</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <span class="rating-text">(5.0)</span>
+                </div>
+                <div class="appointment-actions">
+                  <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                  <a href="#" class="btn btn-primary btn-sm">Book Appointment</a>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Doctor Card -->
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="static/assets/img/health/staff-9.webp" alt="Dr. James Thompson" class="img-fluid">
+                <div class="availability-badge offline">Next: Tomorrow 9AM</div>
+              </div>
+              <div class="doctor-info">
+                <h5>Dr. James Thompson</h5>
+                <p class="specialty">Orthopedics</p>
+                <p class="experience">20+ years experience</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                  <span class="rating-text">(4.8)</span>
+                </div>
+                <div class="appointment-actions">
+                  <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                  <a href="#" class="btn btn-primary btn-sm">Book Appointment</a>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Doctor Card -->
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="static/assets/img/health/staff-5.webp" alt="Dr. Lisa Anderson" class="img-fluid">
+                <div class="availability-badge online">Available</div>
+              </div>
+              <div class="doctor-info">
+                <h5>Dr. Lisa Anderson</h5>
+                <p class="specialty">Dermatology</p>
+                <p class="experience">10+ years experience</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <span class="rating-text">(4.6)</span>
+                </div>
+                <div class="appointment-actions">
+                  <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                  <a href="#" class="btn btn-primary btn-sm">Book Appointment</a>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Doctor Card -->
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="static/assets/img/health/staff-12.webp" alt="Dr. Robert Kim" class="img-fluid">
+                <div class="availability-badge online">Available</div>
+              </div>
+              <div class="doctor-info">
+                <h5>Dr. Robert Kim</h5>
+                <p class="specialty">Oncology</p>
+                <p class="experience">18+ years experience</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <span class="rating-text">(4.9)</span>
+                </div>
+                <div class="appointment-actions">
+                  <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                  <a href="#" class="btn btn-primary btn-sm">Book Appointment</a>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Doctor Card -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Find A Doctor Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h2 data-aos="fade-up" data-aos-delay="200">Your Health is Our Priority</h2>
+            <p data-aos="fade-up" data-aos-delay="250">“Your Health is Our Priority” is a core value and guiding principle used by hospitals and healthcare providers to show their commitment to patient care, safety, and well-being. It emphasizes that every medical decision and service is focused on improving and protecting the patient’s health.</p>
+
+            <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
+              <a href="appointment.html" class="btn-primary">Book Appointment</a>
+              <a href="doctors.html" class="btn-secondary">Find a Doctor</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row features-row" data-aos="fade-up" data-aos-delay="400">
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="icon-wrapper">
+                <i class="bi bi-heart-pulse"></i>
+              </div>
+              <h5>24/7 Emergency Care</h5>
+              <p>Emergency care is the immediate medical treatment given to patients in critical or life-threatening conditions to save lives and prevent serious complications.</p>
+              <a href="#" class="feature-link">
+                <span>Learn More</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="icon-wrapper">
+                <i class="bi bi-calendar-check"></i>
+              </div>
+              <h5>Easy Online Booking</h5>
+              <p>digital healthcare service that allows patients to schedule doctor appointments, tests, or hospital services online using a website or mobile app without the need to wait in queues.</p>
+              <a href="#" class="feature-link">
+                <span>Book Now</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="icon-wrapper">
+                <i class="bi bi-people"></i>
+              </div>
+              <h5>Expert Medical Team</h5>
+              <p>highly qualified doctors, surgeons, nurses, and healthcare professionals who work together to provide the best possible treatment and care for patients.</p>
+              <a href="#" class="feature-link">
+                <span>Meet Our Doctors</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="emergency-alert" data-aos="zoom-in" data-aos-delay="500">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <div class="emergency-content">
+                <div class="emergency-icon">
+                  <i class="bi bi-telephone-fill"></i>
+                </div>
+                <div class="emergency-text">
+                  <h4>Medical Emergency?</h4>
+                  <p>Call our 24/7 emergency hotline for immediate assistance</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 text-end">
+              <a href="tel:911" class="emergency-btn">
+                <i class="bi bi-telephone-fill"></i>
+                Call:9515065644
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Call To Action Section -->
+
+    <!-- Emergency Info Section -->
+    <section id="emergency-info" class="emergency-info section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Emergency Info</h2>
+        <p>🚑 Emergency Contact Number: 108 (India) / 91-9014693432 / Hospital Helpline: +91-98765 43210
+🏥 Emergency Department Location: Ground Floor, Block A – 24/7 Service
+👨‍⚕️ Services Available:
+
+Trauma and accident care
+
+Heart attack & stroke management
+
+Burns and poisoning treatment
+
+Respiratory emergencies
+
+Pediatric and maternal emergencies</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+
+           
+
+  </main>
+
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="static/assets/vendor/aos/aos.js"></script>
+  <script src="static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="static/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+  <!-- Google Translate (hidden element) -->
+  <div id="google_translate_element" style="display:none;"></div>
+  <script>
+    function googleTranslateElementInit(){
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi,es,fr,de', autoDisplay: false}, 'google_translate_element');
+    }
+    (function(){
+      const setLang = (lang) => {
+        const iframe = document.querySelector('iframe.goog-te-menu-frame');
+        if (!iframe) {
+          setTimeout(() => setLang(lang), 300);
+          return;
+        }
+        const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const anchors = innerDoc.querySelectorAll('a.goog-te-menu2-item');
+        anchors.forEach(a => {
+          const val = a.getAttribute('data-language-code');
+          if (val === lang) { a.click(); }
+        });
+      };
+      const selectEl = document.getElementById('langSelect');
+      if (selectEl) {
+        const saved = localStorage.getItem('site_lang');
+        if (saved) selectEl.value = saved;
+        selectEl.addEventListener('change', function(){
+          const lang = this.value;
+          localStorage.setItem('site_lang', lang);
+          setLang(lang);
+        });
+        // Apply saved language on load
+        if (saved) setTimeout(()=> setLang(saved), 800);
+      }
+    })();
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+
+</html>

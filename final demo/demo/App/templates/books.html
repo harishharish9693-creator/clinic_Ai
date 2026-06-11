@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-gradient: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    --card-bg: #ffffff;
+    --accent: #1976d2;
+    --accent-hover: #0b66b2;
+    --muted: #555;
+    --shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  body{
+    margin:0; font-family:'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    color:#111;
+    min-height:100vh;
+  }
+
+  #booksSection {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px 30px;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+
+  #booksSection h3 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 25px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-right: 10px;
+    color: var(--muted);
+  }
+
+  select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  select:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px rgba(25,118,210,0.3);
+  }
+
+  #booksUl {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 15px;
+  }
+
+  #booksUl li {
+    background-color: #f0f4f8;
+    padding: 15px 18px;
+    border-radius: 12px;
+    border-left: 5px solid var(--accent);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  #booksUl li:hover {
+    transform: translateY(-3px);
+    background-color: #e2ebf7;
+  }
+
+  #booksUl li a {
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+
+  #booksUl li a:hover {
+    text-decoration: underline;
+    color: var(--accent-hover);
+  }
+
+  @media(max-width:600px){
+    #booksSection{
+      padding:20px;
+    }
+    #booksUl{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="booksSection">
+  <h3>Books to Read in Free Time</h3>
+
+  <label for="categorySelect">Choose a category:</label>
+  <select id="categorySelect" onchange="filterBooks()"></select>
+
+  <div id="booksList">
+    <ul id="booksUl"></ul>
+  </div>
+</div>
+
+<script>
+const books = [
+  {title: "Pride and Prejudice", author: "Jane Austen", link: "https://www.gutenberg.org/ebooks/1342", category: "novel"},
+  {title: "Moby-Dick", author: "Herman Melville", link: "https://www.gutenberg.org/ebooks/2701", category: "novel"},
+  {title: "Frankenstein", author: "Mary Shelley", link: "https://www.gutenberg.org/ebooks/84", category: "novel"},
+  {title: "The Odyssey", author: "Homer", link: "https://www.gutenberg.org/ebooks/1727", category: "epic"},
+  {title: "The Iliad", author: "Homer", link: "https://www.gutenberg.org/ebooks/6130", category: "epic"},
+  {title: "The Divine Comedy", author: "Dante Alighieri", link: "https://www.gutenberg.org/ebooks/8800", category: "epic"},
+  {title: "Alice’s Adventures in Wonderland", author: "Lewis Carroll", link: "https://www.gutenberg.org/ebooks/11", category: "novel"},
+  {title: "Dracula", author: "Bram Stoker", link: "https://www.gutenberg.org/ebooks/345", category: "novel"},
+  {title: "Paradise Lost", author: "John Milton", link: "https://www.gutenberg.org/ebooks/20", category: "philosophy"},
+  {title: "The Picture of Dorian Gray", author: "Oscar Wilde", link: "https://www.gutenberg.org/ebooks/174", category: "novel"},
+  {title: "War and Peace", author: "Leo Tolstoy", link: "https://www.gutenberg.org/ebooks/2600", category: "novel"},
+  {title: "Les Misérables", author: "Victor Hugo", link: "https://www.gutenberg.org/ebooks/135", category: "novel"},
+  {title: "The Count of Monte Cristo", author: "Alexandre Dumas", link: "https://www.gutenberg.org/ebooks/1184", category: "novel"},
+  {title: "The Three Musketeers", author: "Alexandre Dumas", link: "https://www.gutenberg.org/ebooks/1257", category: "novel"},
+  {title: "The Jungle Book", author: "Rudyard Kipling", link: "https://www.gutenberg.org/ebooks/236", category: "novel"},
+  {title: "The Adventures of Sherlock Holmes", author: "Arthur Conan Doyle", link: "https://www.gutenberg.org/ebooks/1661", category: "novel"},
+  {title: "Ulysses", author: "James Joyce", link: "https://www.gutenberg.org/ebooks/4300", category: "novel"},
+];
+
+const booksUl = document.getElementById("booksUl");
+const categorySelect = document.getElementById("categorySelect");
+
+function displayBooks(filteredBooks) {
+  booksUl.innerHTML = "";
+  const seen = new Set();
+  filteredBooks.forEach(b => {
+    const key = b.title + " - " + b.author;
+    if (!seen.has(key)) {
+      seen.add(key);
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = b.link;
+      a.target = "_blank";
+      a.textContent = `${b.title} – ${b.author}`;
+      li.appendChild(a);
+      booksUl.appendChild(li);
+    }
+  });
+}
+
+function filterBooks() {
+  const category = categorySelect.value;
+  if (category === "all") {
+    displayBooks(books);
+  } else {
+    const filtered = books.filter(b => b.category === category);
+    displayBooks(filtered);
+  }
+}
+
+function initCategories() {
+  const categories = ["all", ...new Set(books.map(b => b.category))];
+  categorySelect.innerHTML = "";
+  categories.forEach(c => {
+    const option = document.createElement("option");
+    option.value = c;
+    option.textContent = c.charAt(0).toUpperCase() + c.slice(1);
+    categorySelect.appendChild(option);
+  });
+}
+
+initCategories();
+displayBooks(books);
+</script>
+</body>
+</html>

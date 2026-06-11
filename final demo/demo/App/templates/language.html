@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 15px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    select {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      background: #fff;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .welcome-section {
+      text-align: center;
+      margin: 40px auto;
+    }
+
+    .welcome-section h1 {
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      color: #ffe082;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <li class="lang">
+      <select id="languageSelector">
+        <option value="en">🌐 English</option>
+        <option value="hi">हिन्दी (Hindi)</option>
+        <option value="te">తెలుగు (Telugu)</option>
+      </select>
+    </li>
+  </header>
+
+  <div class="welcome-section">
+    <h1 data-key="tagline">"EVERY MEMORY THAT MATTERS"</h1>
+    <h1 data-key="welcome">Welcome, MATES👋</h1>
+    <p class="greeting" data-key="greeting">Have a wonderful day 💙</p>
+    <p id="welcome-date"></p>
+    <p id="welcome-time"></p>
+  </div>
+
+  <div class="grid">
+    <div class="card medicine-section">
+      <h2 data-key="medicineTitle">💊 Medicine Reminder</h2>
+      <p data-key="medicineDesc">Here are today’s medicines:</p>
+    </div>
+
+    <div class="card routine-section">
+      <h2 data-key="routineTitle">📅 Daily Routine</h2>
+      <p data-key="routineDesc">Your planned daily activities.</p>
+    </div>
+
+    <div class="card contact-section">
+      <h2 data-key="contactTitle">📞 Family Contacts</h2>
+      <p data-key="contactDesc">Stay connected with your loved ones.</p>
+    </div>
+
+    <div class="card memory-section">
+      <h2 data-key="memoryTitle">💖 Memory Comfort</h2>
+      <p data-key="memoryDesc">Cherish and revisit your precious memories.</p>
+    </div>
+
+    <div class="card emergency-section">
+      <h2 data-key="emergencyTitle">🚨 Emergency</h2>
+      <p data-key="emergencyDesc">Quick access to emergency contacts.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p data-key="footerQuick">Quick Links</p>
+    <p data-key="footerHelp">❓ Help</p>
+    <p data-key="footerSettings">⚙ Settings</p>
+    <p data-key="footerPrivacy">🔒 Privacy</p>
+    <p data-key="footerSupport">Technical Support</p>
+  </footer>
+
+  <script>
+    // 🌐 Translations
+    const translations = {
+      en: {
+        tagline: '"EVERY MEMORY THAT MATTERS"',
+        welcome: "Welcome, MATES👋",
+        greeting: "Have a wonderful day 💙",
+        medicineTitle: "💊 Medicine Reminder",
+        medicineDesc: "Here are today’s medicines:",
+        routineTitle: "📅 Daily Routine",
+        routineDesc: "Your planned daily activities.",
+        contactTitle: "📞 Family Contacts",
+        contactDesc: "Stay connected with your loved ones.",
+        memoryTitle: "💖 Memory Comfort",
+        memoryDesc: "Cherish and revisit your precious memories.",
+        emergencyTitle: "🚨 Emergency",
+        emergencyDesc: "Quick access to emergency contacts.",
+        footerQuick: "Quick Links",
+        footerHelp: "❓ Help",
+        footerSettings: "⚙ Settings",
+        footerPrivacy: "🔒 Privacy",
+        footerSupport: "Technical Support"
+      },
+      hi: {
+        tagline: '"हर याद जो मायने रखती है"',
+        welcome: "स्वागत है, साथियों👋",
+        greeting: "आपका दिन शुभ हो 💙",
+        medicineTitle: "💊 दवा अनुस्मारक",
+        medicineDesc: "आज की दवाइयाँ:",
+        routineTitle: "📅 दैनिक दिनचर्या",
+        routineDesc: "आपकी योजनाबद्ध गतिविधियाँ।",
+        contactTitle: "📞 परिवार संपर्क",
+        contactDesc: "अपने प्रियजनों से जुड़े रहें।",
+        memoryTitle: "💖 यादें",
+        memoryDesc: "अपनी कीमती यादों को संजोएं।",
+        emergencyTitle: "🚨 आपातकाल",
+        emergencyDesc: "आपातकालीन संपर्क तक त्वरित पहुंच।",
+        footerQuick: "त्वरित लिंक",
+        footerHelp: "❓ मदद",
+        footerSettings: "⚙ सेटिंग्स",
+        footerPrivacy: "🔒 गोपनीयता",
+        footerSupport: "तकनीकी सहायता"
+      },
+      te: {
+        tagline: '"ప్రతి జ్ఞాపకం విలువైనది"',
+        welcome: "స్వాగతం స్నేహితులారా👋",
+        greeting: "మీ రోజు ఆనందంగా గడవాలి 💙",
+        medicineTitle: "💊 మందుల గుర్తింపు",
+        medicineDesc: "ఈ రోజు తీసుకోవాల్సిన మందులు:",
+        routineTitle: "📅 రోజువారీ కార్యక్రమం",
+        routineDesc: "మీ ప్రణాళిక ప్రకారం రోజువారీ పనులు.",
+        contactTitle: "📞 కుటుంబ పరిచయాలు",
+        contactDesc: "మీ కుటుంబంతో అనుసంధానంగా ఉండండి.",
+        memoryTitle: "💖 జ్ఞాపకాలు",
+        memoryDesc: "మీ విలువైన జ్ఞాపకాలను గుర్తుంచుకోండి.",
+        emergencyTitle: "🚨 అత్యవసరం",
+        emergencyDesc: "అత్యవసర పరిచయాలకు త్వరిత ప్రాప్తి.",
+        footerQuick: "త్వరిత లింకులు",
+        footerHelp: "❓ సహాయం",
+        footerSettings: "⚙ సెట్టింగ్స్",
+        footerPrivacy: "🔒 గోప్యత",
+        footerSupport: "సాంకేతిక సహాయం"
+      }
+    };
+
+    function updateLanguage(lang) {
+      document.querySelectorAll("[data-key]").forEach(el => {
+        const key = el.getAttribute("data-key");
+        if (translations[lang] && translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+      updateDateTime(lang);
+    }
+
+    function updateDateTime(lang = "en") {
+      const now = new Date();
+      const locale = lang === "hi" ? "hi-IN" : lang === "te" ? "te-IN" : "en-US";
+
+      const dateOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+      const timeOptions = { hour: "2-digit", minute: "2-digit", hour12: true };
+
+      document.getElementById("welcome-date").innerText =
+        new Intl.DateTimeFormat(locale, dateOptions).format(now);
+      document.getElementById("welcome-time").innerText =
+        new Intl.DateTimeFormat(locale, timeOptions).format(now);
+    }
+
+    document.getElementById("languageSelector").addEventListener("change", function () {
+      updateLanguage(this.value);
+    });
+
+    // Default
+    updateLanguage("en");
+  </script>
+</body>
+</html>

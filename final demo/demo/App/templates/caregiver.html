@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caregiver Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-gradient: linear-gradient(135deg,#a1c4fd,#c2e9fb);
+    --card-bg: rgba(255,255,255,0.95);
+    --accent: #b91059;
+    --accent-hover: #059669;
+    --btn-color: #3b82f6;
+    --btn-hover: #2563eb;
+    --shadow: 0 8px 24px rgba(0,0,0,0.15);
+    --muted: #555;
+  }
+
+  body {
+    margin:0; 
+    font-family:'Poppins',sans-serif;
+    background: var(--bg-gradient);
+    color: #111;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 10px;
+  }
+
+  .container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    max-width: 900px;
+    width: 100%;
+  }
+
+  h2 {
+    text-align:center;
+    color: var(--accent);
+    margin-bottom: 25px;
+  }
+
+  input, button {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  button {
+    background: var(--btn-color);
+    color: white;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+
+  #dashboard {display:none;}
+
+  #map {
+    width:100%;
+    height:400px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  #status {
+    background:#e2f0ea;
+    padding:15px;
+    border-radius:10px;
+    font-weight:500;
+  }
+
+  #status p {margin:5px 0;}
+
+  /* ===== MUSIC PLAYER ===== */
+  #musicSection {
+    margin-top:30px;
+  }
+
+  #musicList {
+    list-style:none;
+    padding:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  #musicList li {
+    background: #f2d1d6;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:500;
+    transition: all 0.3s;
+    text-align:center;
+  }
+
+  #musicList li:hover {
+    background:#a2e4d0;
+    color: #057d6f;
+    transform: translateY(-2px);
+  }
+
+  audio {
+    width:100%;
+    margin-top:10px;
+    border-radius:8px;
+  }
+
+  @media(max-width:600px){
+    .container {padding:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="authContainer">
+  <h2><u> CAREGIVER Login / Sign Up</u></h2>
+  <input type="text" id="userId" placeholder="User ID">
+  <input type="password" id="password" placeholder="Password">
+  <button id="signupBtn">Sign Up</button>
+  <button id="loginBtn">Login</button>
+  <p id="authMsg" style="color:red;"></p>
+</div>
+
+<div class="container" id="dashboard">
+  <h2>Patient Monitoring Dashboard</h2>
+  <div id="map"></div>
+  <div id="status">
+    <p>Latitude: <span id="lat">0</span></p>
+    <p>Longitude: <span id="lng">0</span></p>
+    <p>Alpha (Z-axis): <span id="alpha">0</span></p>
+    <p>Beta (X-axis): <span id="beta">0</span></p>
+    <p>Gamma (Y-axis): <span id="gamma">0</span></p>
+    <p>Last Update: <span id="lastUpdate">--</span></p>
+  </div>
+
+  <!-- Music Section -->
+  <div id="musicSection">
+    <h3>Background Music</h3>
+    <ul id="musicList"></ul>
+    <audio id="audioPlayer" controls></audio>
+  </div>
+</div>
+
+<!-- Google Maps JS -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+<script>
+/* ================== AUTHENTICATION ================== */
+const signupBtn = document.getElementById("signupBtn");
+const loginBtn = document.getElementById("loginBtn");
+const userIdInput = document.getElementById("userId");
+const passwordInput = document.getElementById("password");
+const authMsg = document.getElementById("authMsg");
+const authContainer = document.getElementById("authContainer");
+const dashboard = document.getElementById("dashboard");
+
+signupBtn.addEventListener("click", () => {
+  const userId = userIdInput.value.trim();
+  const pass = passwordInput.value.trim();
+  if(!userId || !pass){ authMsg.textContent = "Enter both User ID and Password!"; return; }
+
+  let users = JSON.parse(localStorage.getItem("caregivers") || "{}");
+  if(users[userId]){ authMsg.textContent = "User already exists!"; return; }
+
+  users[userId] = pass;
+  localStorage.setItem("caregivers", JSON.stringify(users));
+  authMsg.style.color = "green";
+  authMsg.textContent = "Sign Up successful! You can login now.";
+});
+
+loginBtn.addEventListener("click", () => {
+  const userId = userIdInput.value.trim();
+  const pass = passwordInput.value.trim();
+  if(!userId || !pass){ authMsg.textContent = "Enter both User ID and Password!"; return; }
+
+  let users = JSON.parse(localStorage.getItem("caregivers") || "{}");
+  if(users[userId] && users[userId] === pass){
+    authContainer.style.display = "none";
+    dashboard.style.display = "block";
+    initDashboard();
+    initMusic();
+  } else {
+    authMsg.style.color = "red";
+    authMsg.textContent = "Invalid credentials!";
+  }
+});
+
+/* ================== DASHBOARD ================== */
+let map, marker;
+function initDashboard(){
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: {lat: 0, lng: 0},
+  });
+  marker = new google.maps.Marker({position:{lat:0,lng:0}, map:map, title:"Patient"});
+
+  if(navigator.geolocation){
+    navigator.geolocation.watchPosition((pos)=>{
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      updatePatientPosition(lat,lng);
+    });
+  } else {
+    alert("Geolocation not supported!");
+  }
+
+  window.addEventListener("deviceorientation", (event)=>{
+    document.getElementById("alpha").textContent = event.alpha.toFixed(2);
+    document.getElementById("beta").textContent = event.beta.toFixed(2);
+    document.getElementById("gamma").textContent = event.gamma.toFixed(2);
+  });
+}
+
+function updatePatientPosition(lat, lng){
+  document.getElementById("lat").textContent = lat.toFixed(6);
+  document.getElementById("lng").textContent = lng.toFixed(6);
+  document.getElementById("lastUpdate").textContent = new Date().toLocaleTimeString();
+  const pos = {lat: lat, lng: lng};
+  marker.setPosition(pos);
+  map.setCenter(pos);
+}
+
+/* ================== MUSIC ================== */
+function initMusic(){
+  const musicListData = [
+    {title:"Relaxing Piano", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+    {title:"Soft Guitar", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+    {title:"Ambient Music", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+    {title:"Calm Morning", file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"}
+  ];
+
+  const musicUl = document.getElementById("musicList");
+  const audioPlayer = document.getElementById("audioPlayer");
+
+  musicListData.forEach(song => {
+    const li = document.createElement("li");
+    li.textContent = song.title;
+    li.addEventListener("click", () => {
+      audioPlayer.src = song.file;
+      audioPlayer.play();
+    });
+    musicUl.appendChild(li);
+  });
+}
+</script>
+</body>
+</html>

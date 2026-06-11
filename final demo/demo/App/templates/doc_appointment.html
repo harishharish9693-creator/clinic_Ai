@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Appointments</title>
+<style>
+  body {font-family: Arial, sans-serif; background:#f4f4f4; margin:0; padding:0;}
+  .container {max-width:800px; margin:50px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+  h2{text-align:center; color:#10b981;}
+  table {width:100%; border-collapse: collapse; margin-top:20px;}
+  th, td {padding:12px; border-bottom:1px solid #ccc; text-align:left;}
+  th {background:#f0f4f8;}
+  button {padding:8px 12px; border:none; border-radius:6px; background:#10b981; color:#fff; cursor:pointer;}
+  button:hover {background:#0f766e;}
+  #bookedList {margin-top:20px;}
+  #bookedList li {padding:10px; background:#e2f0ea; margin-bottom:10px; border-radius:6px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Doctor Appointments</h2>
+  <table id="doctorsTable">
+    <thead>
+      <tr>
+        <th>Doctor</th>
+        <th>Specialization</th>
+        <th>Timings</th>
+        <th>Fee</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Doctors will be injected here -->
+    </tbody>
+  </table>
+
+  <h3>Booked Appointments</h3>
+  <ul id="bookedList"></ul>
+</div>
+
+<script>
+  const doctors = [
+    {name:"Dr. John Smith", specialization:"Neurology", timings:"10:00 - 13:00", fee:"$100"},
+    {name:"Dr. Mary Johnson", specialization:"Orthopedics", timings:"14:00 - 18:00", fee:"$80"},
+    {name:"Dr. Robert Brown", specialization:"Cardiology", timings:"09:00 - 12:00", fee:"$120"},
+    {name:"Dr. Linda Davis", specialization:"Pediatrics", timings:"11:00 - 15:00", fee:"$90"}
+    // Add more doctors here
+  ];
+
+  const doctorsTableBody = document.querySelector("#doctorsTable tbody");
+  const bookedList = document.getElementById("bookedList");
+
+  // ================== DISPLAY DOCTORS ==================
+  function displayDoctors() {
+    doctorsTableBody.innerHTML = "";
+    doctors.forEach((doc, index)=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${doc.name}</td>
+        <td>${doc.specialization}</td>
+        <td>${doc.timings}</td>
+        <td>${doc.fee}</td>
+        <td><button onclick="bookAppointment(${index})">Book Appointment</button></td>
+      `;
+      doctorsTableBody.appendChild(tr);
+    });
+  }
+
+  // ================== BOOK APPOINTMENT ==================
+  function bookAppointment(index){
+    const doc = doctors[index];
+    let date = prompt(`Enter appointment date for ${doc.name} (YYYY-MM-DD):`);
+    if(date){
+      const booked = {doctor: doc.name, specialization: doc.specialization, date: date, fee: doc.fee};
+      let bookedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
+      bookedAppointments.push(booked);
+      localStorage.setItem("appointments", JSON.stringify(bookedAppointments));
+      alert(`Appointment booked with ${doc.name} on ${date}`);
+      displayBookedAppointments();
+    }
+  }
+
+  // ================== DISPLAY BOOKED APPOINTMENTS ==================
+  function displayBookedAppointments(){
+    const bookedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
+    bookedList.innerHTML = "";
+    bookedAppointments.forEach(app => {
+      const li = document.createElement("li");
+      li.textContent = `${app.date} - ${app.doctor} (${app.specialization}) | Fee: ${app.fee}`;
+      bookedList.appendChild(li);
+    });
+  }
+
+  // ================== INITIALIZE ==================
+  displayDoctors();
+  displayBookedAppointments();
+</script>
+
+</body>
+</html>
