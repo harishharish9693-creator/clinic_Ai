@@ -1,4 +1,4 @@
-# AI Companion for Memory Care & Clinical Support
+# MAX CMR — AI Companion for Memory Care & Clinical Support
 
 > A modern Flask-based memory care companion with AI voice assistant, appointment management, clinical support workflows, and caregiver-first navigation.
 

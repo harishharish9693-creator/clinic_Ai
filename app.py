@@ -79,6 +79,17 @@ def ask_max():
 # ---------------------- Appointment Database Setup ----------------------
 
 DATABASE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'appointments.db')
+if os.environ.get('VERCEL') == '1':
+    # Vercel has a read-only filesystem except for /tmp
+    VERCEL_DB_PATH = '/tmp/appointments.db'
+    if not os.path.exists(VERCEL_DB_PATH) and os.path.exists(DATABASE_PATH):
+        import shutil
+        try:
+            shutil.copy(DATABASE_PATH, VERCEL_DB_PATH)
+        except Exception as e:
+            print(f"Error copying database to /tmp: {e}")
+    DATABASE_PATH = VERCEL_DB_PATH
+
 USE_MYSQL = bool(os.getenv('MYSQL_HOST'))
 
 
@@ -483,7 +494,9 @@ def family():
     finally:
         conn.close()
     return render_template('family.html', contacts=contacts)
+# Initialize database on startup
+init_db()
+create_default_admin_if_needed()
+
 if __name__ == '__main__':
-    init_db()
-    create_default_admin_if_needed()
     app.run(debug=True)
